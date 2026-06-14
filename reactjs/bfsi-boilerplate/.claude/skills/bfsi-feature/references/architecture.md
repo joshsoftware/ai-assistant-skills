@@ -12,15 +12,15 @@ For BFSI, this split matters because:
 - **Easy mocking** — components test in isolation; you don't fight network in unit tests
 - **Reusability** — same component renders in two contexts with different containers (e.g. customer-view vs admin-view)
 
-## Why Zod everywhere?
+## Why interfaces for API shapes?
 
-We use Zod for THREE distinct purposes:
+We use TypeScript interfaces for API request/response shapes, and Zod for form validation:
 
-1. **API response validation** — every API response is parsed through a Zod schema before reaching components. Rejects malformed responses (XSS defence).
-2. **Form validation** — same schema or a derived schema validates form inputs.
-3. **Type generation** — `z.infer<typeof schema>` gives us TS types from a single source of truth.
+1. **API request/response typing** — every network shape is declared as a TypeScript interface in `types.ts`. Services and hooks use those interfaces at compile time; responses are not parsed through Zod by default.
+2. **Form validation** — a schema in `schema.ts` validates form inputs.
+3. **Form type generation** — `z.infer<typeof schema>` gives us TS form types from a single source of truth.
 
-This means: edit one Zod schema, and types + runtime checks update together. No drift.
+This means: edit the interface for network shapes, or the Zod form schema for form inputs. Network typing and runtime form validation stay separate on purpose.
 
 ## Why permission-gated routes?
 
