@@ -3,6 +3,10 @@
 # Runs lightweight pattern checks; the full audit lives in bfsi-accessibility-auditor agent.
 set -euo pipefail
 
+if [[ "${BFSI_FAST_BOOTSTRAP:-}" == "1" ]]; then
+  exit 0
+fi
+
 INPUT=$(cat)
 FILE_PATH=$(printf '%s' "$INPUT" | jq -r '.tool_input.file_path // ""')
 

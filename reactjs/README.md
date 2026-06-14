@@ -93,6 +93,10 @@ builds the complete foundation from scratch — dependencies (npm), tooling conf
 folder structure, HTTP/PII/i18n primitives, routing, layouts, and the `login`
 reference feature — **without scaffolding business features**.
 
+The script runs in a bootstrap-fast mode that skips the expensive per-edit
+verification hooks, so it finishes much faster than a normal interactive Claude
+session.
+
 ### Download Setup Script
 
 ```bash

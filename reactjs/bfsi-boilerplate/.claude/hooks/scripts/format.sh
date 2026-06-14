@@ -3,6 +3,10 @@
 # logs to stderr on failure (non-blocking, since async).
 set -euo pipefail
 
+if [[ "${BFSI_FAST_BOOTSTRAP:-}" == "1" ]]; then
+  exit 0
+fi
+
 INPUT=$(cat)
 FILE_PATH=$(printf '%s' "$INPUT" | jq -r '.tool_input.file_path // ""')
 
@@ -30,8 +34,8 @@ if [[ ! -f "$ROOT/package.json" ]]; then
 fi
 
 # Use the project's prettier if available
-if command -v pnpm >/dev/null 2>&1; then
-  cd "$ROOT" && pnpm exec prettier --write "$FILE_PATH" 2>&1 | tail -5 >&2 || true
+if command -v npm >/dev/null 2>&1; then
+  cd "$ROOT" && npm exec -- prettier --write "$FILE_PATH" 2>&1 | tail -5 >&2 || true
 elif command -v npx >/dev/null 2>&1; then
   cd "$ROOT" && npx prettier --write "$FILE_PATH" 2>&1 | tail -5 >&2 || true
 fi

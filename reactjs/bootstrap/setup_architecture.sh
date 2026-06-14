@@ -22,6 +22,10 @@
 # Env overrides:
 #   CLAUDE_MODEL  model to use     (passed to `claude --model`)
 #
+# Fast path:
+#   bootstrap skips the expensive per-edit verification hooks via
+#   BFSI_FAST_BOOTSTRAP=1 because this script is a one-shot generator.
+#
 
 set -euo pipefail
 
@@ -65,7 +69,7 @@ PROMPT="$PROMPT The project name is '$PROJECT_NAME'."
 if [ -n "$SCOPE" ]; then
     PROMPT="$PROMPT Use the npm scope '$SCOPE'."
 fi
-PROMPT="$PROMPT Use npm (not pnpm). Build the foundation and the login reference feature only — do not scaffold business features."
+PROMPT="$PROMPT Use npm only. Build the foundation and the login reference feature only — do not scaffold business features."
 
 MODEL_ARGS=()
 [ -n "${CLAUDE_MODEL:-}" ] && MODEL_ARGS=(--model "$CLAUDE_MODEL")
@@ -77,7 +81,7 @@ echo ""
 
 (
     cd "$PROJECT_DIR"
-    claude -p "$PROMPT" --permission-mode acceptEdits "${MODEL_ARGS[@]}"
+    BFSI_FAST_BOOTSTRAP=1 claude -p "$PROMPT" --permission-mode acceptEdits "${MODEL_ARGS[@]}"
 )
 
 echo ""

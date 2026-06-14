@@ -10,7 +10,7 @@ The tools each layer is built on. Pick the one the convention assigns — don't 
 | ------- | ---- | ----- |
 | **Language** | TypeScript (strict) | no implicit `any`; network shapes are interfaces, form/env types via `z.infer` |
 | **UI runtime** | React 19 | function components + hooks only |
-| **Build / dev server** | Vite 5 | `pnpm dev` on :5173; assets Vite-hashed from `src/assets/` |
+| **Build / dev server** | Vite 5 | `npm run dev` on :5173; assets Vite-hashed from `src/assets/` |
 | **Styling** | Tailwind CSS + shadcn/ui | shadcn components owned in `src/components/ui/`, added via `shadcn-ui` CLI — not hand-authored |
 | **Server state** | TanStack Query v5 | feature `hooks/`; the only home for fetched/cached data |
 | **Client state** | Zustand v5 | `src/stores/`; app-wide UI state only — never mirror server data |
@@ -19,10 +19,10 @@ The tools each layer is built on. Pick the one the convention assigns — don't 
 | **HTTP** | Axios | single instance from `createAxios()` in `src/lib/http/` |
 | **Routing** | react-router-dom v6 | code-split via `React.lazy()`; leaf gating via `<ProtectedRoute permission="...">` |
 | **i18n** | react-i18next | `en` / `hi`; one namespace per feature |
-| **Unit / component tests** | Vitest + Testing Library | `pnpm test` |
-| **E2E tests** | Playwright | `pnpm test:e2e` |
+| **Unit / component tests** | Vitest + Testing Library | `npm test` |
+| **E2E tests** | Playwright | `npm run test:e2e` |
 | **Lint / format** | ESLint (`--max-warnings 0`) + Prettier | warnings fail CI |
-| **Package manager** | pnpm | |
+| **Package manager** | npm | |
 
 ## Layers (top to bottom)
 

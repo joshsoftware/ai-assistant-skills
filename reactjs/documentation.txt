@@ -61,7 +61,7 @@ It bakes in:
 ## Prerequisites
 
 - **Node.js** ≥ 20.x (LTS)
-- **pnpm** ≥ 9.x — `npm install -g pnpm` (this repo standardises on pnpm; do not mix with npm/yarn)
+- **npm** ≥ 10.x (bundled with Node 20+)
 - **Git** ≥ 2.40
 - A modern browser (Chromium-based recommended for Playwright)
 
@@ -76,15 +76,15 @@ It bakes in:
 git clone https://github.com/<your-org>/<repo-name>.git
 cd <repo-name>
 
-# 2. Install dependencies (pnpm only)
-pnpm install
+# 2. Install dependencies
+npm install
 
 # 3. Set up env — the app will throw a Zod error at boot if this is missing
 cp .env.local.sample .env.local
 # then open .env.local and fill in real values
 
 # 4. Start the dev server (http://localhost:5173)
-pnpm dev
+npm run dev
 ```
 
 You should see the **login** reference feature at `/login`. Use it as the shape for every new feature you add.
@@ -96,17 +96,17 @@ In dev, the route `/dev/showcase` renders a live catalogue of every shipped BFSI
 ## Available scripts
 
 ```bash
-pnpm dev           # Vite dev server on :5173 (with security headers enforced)
-pnpm build         # tsc --noEmit && vite build (production bundle)
-pnpm preview       # Preview the production build locally
-pnpm test          # Vitest — single run (CI mode)
-pnpm test:watch    # Vitest — watch mode
-pnpm test:e2e      # Playwright E2E tests
-pnpm typecheck     # tsc --noEmit (no emit, just type-check)
-pnpm lint          # ESLint (--max-warnings 0; warnings fail CI)
-pnpm lint:fix      # ESLint with autofix
-pnpm format        # Prettier write across src/**
-pnpm analyze       # Bundle treemap → dist/stats.html (auto-opens)
+npm run dev        # Vite dev server on :5173 (with security headers enforced)
+npm run build      # tsc --noEmit && vite build (production bundle)
+npm run preview    # Preview the production build locally
+npm test           # Vitest — single run (CI mode)
+npm run test:watch # Vitest — watch mode
+npm run test:e2e   # Playwright E2E tests
+npm run typecheck  # tsc --noEmit (no emit, just type-check)
+npm run lint       # ESLint (--max-warnings 0; warnings fail CI)
+npm run lint:fix   # ESLint with autofix
+npm run format     # Prettier write across src/**
+npm run analyze    # Bundle treemap → dist/stats.html (auto-opens)
 ```
 
 ---
@@ -128,7 +128,7 @@ pnpm analyze       # Bundle treemap → dist/stats.html (auto-opens)
 │   ├── components/
 │   │   ├── bfsi/           PIIMaskedDisplay and other BFSI primitives
 │   │   ├── common/         FormInput, Image (typed wrappers)
-│   │   └── ui/             shadcn-managed; add via `pnpm dlx shadcn-ui add <c>`
+│   │   └── ui/             shadcn-managed; add via `npx shadcn-ui@latest add <c>`
 │   ├── constants/          endPoints.ts, statusCodes.ts, routes.ts (add queryKeys/regex/app as needed)
 │   ├── features/
 │   │   └── login/          Reference feature — copy its shape for new features
@@ -471,8 +471,8 @@ Required keys (see `.env.local.sample` for the full list):
 
 ## Testing
 
-- **Unit / component**: `pnpm test` (Vitest + Testing Library + jsdom). Helpers live in `src/test-utils/`.
-- **E2E**: `pnpm test:e2e` (Playwright).
+- **Unit / component**: `npm test` (Vitest + Testing Library + jsdom). Helpers live in `src/test-utils/`.
+- **E2E**: `npm run test:e2e` (Playwright).
 - **Patterns**: see the `testing-patterns` and `bfsi-test-pattern` skills — they cover schema tests, service mocks, TanStack Query hook tests, RHF form tests, and BFSI-specific cases (PII masking, auth bypass, race conditions, a11y).
 
 Reference tests are in `src/features/login/__tests__/`.
@@ -506,11 +506,11 @@ The boilerplate ships sensible defaults so every cloned project starts from the 
 | **Route lazy loading**   | [src/routes/index.tsx](src/routes/index.tsx) — `React.lazy()` + `<Suspense>` | Every feature page ships as its own chunk; landing stays in the main bundle for fast paint. |
 | **Query caching**        | [src/api/queryClient.ts](src/api/queryClient.ts)                            | `staleTime: 60s`, `gcTime: 5m`, `refetchOnWindowFocus: false`, retry once on 5xx/network only. |
 | **Image CLS prevention** | [src/components/common/Image.tsx](src/components/common/Image.tsx)          | Mandatory `width`/`height`; defaults to `loading="lazy"` + `decoding="async"`.               |
-| **Bundle analyzer**      | `pnpm analyze` → `dist/stats.html`                                          | `rollup-plugin-visualizer` gated on `npm_lifecycle_event === 'analyze'`; treemap + gzip/brotli sizes. |
+| **Bundle analyzer**      | `npm run analyze` → `dist/stats.html`                                       | `rollup-plugin-visualizer` gated on `npm_lifecycle_event === 'analyze'`; treemap + gzip/brotli sizes. |
 | Memoisation              | Per-feature (skill: `bfsi-perf-react`)                                      | Not shipped — "measure first" is the discipline. Apply on profile evidence, not pre-emptively. |
 | Virtualisation           | Per-feature (skill: `bfsi-perf-virtualize-list`)                            | Not shipped until a real long list lands. Skill recipe is ready to apply.                    |
 
-Run `pnpm analyze` after a perf-sensitive change to inspect chunk sizes before merging.
+Run `npm run analyze` after a perf-sensitive change to inspect chunk sizes before merging.
 
 ---
 
@@ -621,7 +621,7 @@ P2 (style / naming) and doc-only diffs don't trigger the prompt. To disable, rem
 - **Conventional Commits** are enforced by `commitlint` + `husky/commit-msg`.
 - Allowed types: `feat`, `fix`, `security`, `compliance`, `perf`, `refactor`, `docs`, `style`, `test`, `build`, `ci`, `chore`.
 - **No `Co-Authored-By` trailer** — keep commits owned by the actual author.
-- `pnpm exec lint-staged` runs on `pre-commit` from commit #2 onwards (the scaffold commit uses `--no-verify` because the CLI verifier already passed it).
+- `npm exec lint-staged` runs on `pre-commit` from commit #2 onwards (the scaffold commit uses `--no-verify` because the CLI verifier already passed it).
 - After every commit, verify identity: `git log -1 --format='%ae | %ce'`. The post-commit hook will flag mismatches.
 
 Use `/bfsi-commit` to stage + commit with the right type chosen automatically.
@@ -655,7 +655,7 @@ When starting a new BFSI project from this repo:
 ## Gotchas
 
 - `.env.local` is gitignored. If the app fails at boot with a Zod error, copy `.env.local.sample` → `.env.local` and fill in real values.
-- `src/components/ui/` is shadcn-managed. Add components via `pnpm dlx shadcn-ui@latest add <component>` — don't hand-author there.
+- `src/components/ui/` is shadcn-managed. Add components via `npx shadcn-ui@latest add <component>` — don't hand-author there.
 - Dev server enforces tight security headers (`X-Frame-Options: DENY`, etc.). If iframe embedding fails in dev, that's why.
 - ESLint runs with `--max-warnings 0`. Warnings fail CI — fix them as they appear.
 - **Husky** is wired with `git config core.hooksPath .husky`. If hooks stop firing, check that config first.
