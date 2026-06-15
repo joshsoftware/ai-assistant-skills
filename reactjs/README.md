@@ -32,8 +32,9 @@ reactjs/
 
 ## Step 1 — Create the base project
 
-Generates a fresh Vite + React + TypeScript app with npm and clones **only** the
-`.claude` toolkit (skills/agents/commands/hooks) from this repo.
+Generates a fresh Vite + React + TypeScript app with npm (non-interactive, so it
+does **not** auto-install or launch the dev server), then copies the `.claude`
+toolkit (skills/agents/commands/hooks) and a starter `CLAUDE.md` into the project.
 
 ### Download Bootstrap Script
 
@@ -75,12 +76,16 @@ cursor .
 
 What it does:
 
-1. `npm create vite@latest my-bank-app -- --template react-ts`.
-2. Clones the repo (sparse — `.claude` only) and copies it into `my-bank-app/.claude/`.
+1. `npm create vite@latest my-bank-app -- --template react-ts --no-interactive`
+   — non-interactive, so it scaffolds and exits; it does **not** auto-install
+   dependencies or launch the dev server.
+2. Sparse-clones the repo and copies the `.claude/` toolkit **and** a starter
+   `CLAUDE.md` into `my-bank-app/`.
 3. `npm install` (skip with `NO_INSTALL=1`).
 
-Cursor mode mirrors `.claude/skills` → `.cursor/skills` and writes the bootstrap
-skill to `AGENTS.md`.
+The starter `CLAUDE.md` is copied as-is; the `bfsi-bootstrap` skill (Step 2)
+refines it. Cursor mode mirrors `.claude/skills` → `.cursor/skills` and writes
+the bootstrap skill to `AGENTS.md`.
 
 | Env var       | Default                              | Purpose            |
 | ------------- | ------------------------------------ | ------------------ |
