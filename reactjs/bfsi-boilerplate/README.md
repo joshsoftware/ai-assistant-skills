@@ -42,8 +42,9 @@ From the folder where you want the project to live, run it:
 ./create_react_project.sh my-bank-app        # or: ./create_react_project.sh my-bank-app cursor
 ```
 
-This generates a Vite + React + TS app, clones **only** this `.claude/` toolkit
-into it, and runs `npm install`. (Pass `cursor` as a second arg for Cursor.)
+This generates a Vite + React + TS app, clones this `.claude/` toolkit plus the
+canonical `CLAUDE.md` into it, and runs `npm install`. (Pass `cursor` as a
+second arg for Cursor.)
 
 ### Step 2 — Generate the BFSI boilerplate (skill-driven)
 

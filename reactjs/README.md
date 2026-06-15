@@ -8,7 +8,7 @@ The flow is straightforward:
 | Step | React flow |
 | ---- | ---------- |
 | 1 | `npm create vite` creates the base React + TypeScript app |
-| 2 | The `.claude` toolkit is cloned from this repo |
+| 2 | The `.claude` toolkit and `CLAUDE.md` are cloned from this repo |
 | 3 | The `bfsi-bootstrap` skill builds the foundation |
 
 **The boilerplate is not cloned.** A fresh app is generated with **npm**, and the
