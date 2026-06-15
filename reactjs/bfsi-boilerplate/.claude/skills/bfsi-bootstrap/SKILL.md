@@ -11,8 +11,8 @@ currently contains only a bare `npm create vite` (react-ts) app plus this
 foundation from this specification, leaning on the sibling skills for each
 layer's detailed pattern.
 
-This is the React analogue of Flutter's `project-bootstrap` skill: turn a bare
-app into a production-ready, convention-locked foundation — **and stop there**.
+This is the React bootstrap skill: turn a bare app into a production-ready,
+convention-locked foundation — **and stop there**.
 
 ## Ground rules
 

@@ -1,13 +1,15 @@
 # BFSI React — Bootstrap Scripts
 
 Two scripts that take you from nothing to a tailored, AI-ready BFSI React
-project. They mirror the Flutter `bootstrap/` flow:
+project.
 
-| Flutter                          | React (here)                                  |
-| -------------------------------- | --------------------------------------------- |
-| `flutter create` (bare app)      | `npm create vite` (bare React + TS app)       |
-| copy skills from repo            | clone the `.claude` toolkit from repo         |
-| `project-bootstrap` skill builds | `bfsi-bootstrap` skill builds the foundation  |
+The flow is straightforward:
+
+| Step | React flow |
+| ---- | ---------- |
+| 1 | `npm create vite` creates the base React + TypeScript app |
+| 2 | The `.claude` toolkit is cloned from this repo |
+| 3 | The `bfsi-bootstrap` skill builds the foundation |
 
 **The boilerplate is not cloned.** A fresh app is generated with **npm**, and the
 `bfsi-bootstrap` skill — which contains the complete boilerplate setup spec —

@@ -17,8 +17,8 @@ from scratch by the **`bfsi-bootstrap`** skill — see
 
 ## Creating a new project — step by step
 
-This mirrors the Flutter flow: `flutter create` + `project-bootstrap` skill ↔
-`npm create vite` + `bfsi-bootstrap` skill.
+Use the React bootstrap flow: `npm create vite` for the base app, then the
+`bfsi-bootstrap` skill to generate the BFSI foundation.
 
 ### Prerequisites
 
