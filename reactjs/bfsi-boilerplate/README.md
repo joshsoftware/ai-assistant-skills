@@ -17,8 +17,8 @@ from scratch by the **`bfsi-bootstrap`** skill — see
 
 ## Creating a new project — step by step
 
-This mirrors the Flutter flow: `flutter create` + `project-bootstrap` skill ↔
-`npm create vite` + `bfsi-bootstrap` skill.
+Use the React bootstrap flow: `npm create vite` for the base app, then the
+`bfsi-bootstrap` skill to generate the BFSI foundation.
 
 ### Prerequisites
 
@@ -42,8 +42,9 @@ From the folder where you want the project to live, run it:
 ./create_react_project.sh my-bank-app        # or: ./create_react_project.sh my-bank-app cursor
 ```
 
-This generates a Vite + React + TS app, clones **only** this `.claude/` toolkit
-into it, and runs `npm install`. (Pass `cursor` as a second arg for Cursor.)
+This generates a Vite + React + TS app, clones this `.claude/` toolkit plus the
+canonical `CLAUDE.md` into it, and runs `npm install`. (Pass `cursor` as a
+second arg for Cursor.)
 
 ### Step 2 — Generate the BFSI boilerplate (skill-driven)
 

@@ -9,8 +9,7 @@
 # routing, layouts, and the login reference feature) WITHOUT scaffolding
 # business features — feature generation stays with `/bfsi-feature`.
 #
-# This mirrors the Flutter flow's "Initialize this project" step
-# (project-bootstrap skill), automated as a one-shot script. Uses npm.
+# This is the React bootstrap step, automated as a one-shot script. Uses npm.
 #
 # Usage:
 #   ./setup_architecture.sh [project_dir] [--scope @your-org]
