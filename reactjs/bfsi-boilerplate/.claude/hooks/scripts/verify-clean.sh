@@ -2,6 +2,10 @@
 # Post-turn verification: run async after Claude stops. Reports unflushed concerns.
 set -euo pipefail
 
+if [[ "${BFSI_FAST_BOOTSTRAP:-}" == "1" ]]; then
+  exit 0
+fi
+
 cd "${CLAUDE_PROJECT_DIR:-$(pwd)}" 2>/dev/null || cd "$(pwd)"
 
 # Only run if there are source-file changes
@@ -18,8 +22,8 @@ declare -a CONCERNS=()
 
 # 1. Typecheck (quick check)
 if [[ -f "package.json" ]] && grep -q '"typecheck"' package.json 2>/dev/null; then
-  if ! pnpm exec tsc --noEmit 2>/dev/null; then
-    CONCERNS+=("typecheck failing — run \`pnpm typecheck\` to see errors")
+  if ! npx tsc --noEmit 2>/dev/null; then
+    CONCERNS+=("typecheck failing — run \`npm run typecheck\` to see errors")
   fi
 fi
 

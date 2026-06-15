@@ -13,7 +13,7 @@
 # `bfsi-bootstrap` skill — see setup_architecture.sh. This mirrors the Flutter
 # flow: `flutter create` + the project-bootstrap skill.
 #
-# Uses npm (not pnpm).
+# Uses npm only.
 #
 # Usage:
 #   ./create_react_project.sh <project_name> [claude|cursor]

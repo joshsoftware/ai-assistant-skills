@@ -66,7 +66,7 @@ while IFS= read -r line; do
     PKG_NAME="${REST%%/*}"          # core | ui
     PKG_DIR="$NODE_MODULES/$SCOPE_PKG/$PKG_NAME"
 
-    # Resolve symlinks (pnpm link: / workspace).
+    # Resolve symlinks from package-manager links / workspaces.
     [[ -e "$PKG_DIR" ]] || continue          # package not installed → skip
     PKG_DIR="$(cd "$PKG_DIR" 2>/dev/null && pwd -P || printf '%s' "$PKG_DIR")"
 

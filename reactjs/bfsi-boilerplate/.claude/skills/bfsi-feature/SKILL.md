@@ -1,6 +1,6 @@
 ---
 name: bfsi-feature
-description: Scaffolds a new BFSI feature module with the full directory structure (services, hooks, schema, components, routes, tests, i18n keys) wired for TanStack Query. Use when the user types /bfsi-feature, asks to "scaffold a feature", "create a new feature module", "add a CRUD page", or "start a new BFSI module".
+description: Scaffolds a new BFSI feature module with the full directory structure (services, hooks, types, schema, components, routes, tests, i18n keys) wired for TanStack Query. Use when the user types /bfsi-feature, asks to "scaffold a feature", "create a new feature module", "add a CRUD page", or "start a new BFSI module".
 disable-model-invocation: true
 argument-hint: <feature-name> [--no-i18n]
 allowed-tools: Read Write Edit Glob Grep Bash(mkdir:*) Bash(node:*)
@@ -8,7 +8,7 @@ allowed-tools: Read Write Edit Glob Grep Bash(mkdir:*) Bash(node:*)
 
 # BFSI Feature Scaffold
 
-Generates a complete feature module under `src/features/<FeatureName>/` following the BFSI architecture: container-component split, TanStack Query API layer, Zod validation, accessible UI, i18n keys.
+Generates a complete feature module under `src/features/<FeatureName>/` following the BFSI architecture: container-component split, TanStack Query API layer, interface-based network shapes, Zod form validation, accessible UI, i18n keys.
 
 ## Arguments
 
@@ -20,8 +20,8 @@ Generates a complete feature module under `src/features/<FeatureName>/` followin
 ```
 src/features/<FeatureName>/
 ├── services.ts                     # Typed axios calls (POST/GET/...) per endpoint
-├── schema.ts                       # Zod schemas (request, response, form)
-├── types.ts                        # Inferred TS types from Zod
+├── schema.ts                       # Zod schemas (forms only)
+├── types.ts                        # Request/response interfaces + inferred form types
 ├── constants.ts                    # API URLs, cache tags
 ├── routes.tsx                      # Feature routes with <ProtectedRoute>
 ├── containers/
@@ -90,7 +90,7 @@ Output a short summary to the user:
 
 ## Conventions enforced
 
-- **No `any` types.** All types flow from Zod schemas via `z.infer<>`.
+- **No `any` types.** Network shapes live in `types.ts` as interfaces; form types flow from Zod schemas via `z.infer<>`.
 - **No hardcoded strings.** All user-facing strings go through `t()` (or `<Trans>`).
 - **Sensitive fields get `<PIIMaskedDisplay>` wrappers** by default if their names match `/^(pan|aadhaar|account|mobile|email|dob)$/i`.
 - **All routes are `<ProtectedRoute>`** with an explicit `permission` prop.

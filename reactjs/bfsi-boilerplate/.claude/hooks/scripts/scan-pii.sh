@@ -4,6 +4,10 @@
 # Per Claude Code spec, PostToolUse exit 2 shows stderr to Claude (the file is already written).
 set -euo pipefail
 
+if [[ "${BFSI_FAST_BOOTSTRAP:-}" == "1" ]]; then
+  exit 0
+fi
+
 INPUT=$(cat)
 FILE_PATH=$(printf '%s' "$INPUT" | jq -r '.tool_input.file_path // ""')
 

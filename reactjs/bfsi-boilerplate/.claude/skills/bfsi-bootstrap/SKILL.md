@@ -1,6 +1,6 @@
 ---
 name: bfsi-bootstrap
-description: Generate the COMPLETE BFSI React boilerplate foundation from scratch inside a fresh Vite + React + TypeScript app — dependencies (npm), tooling config, folder structure, security/PII/HTTP/i18n primitives, routing, layouts, and the login reference feature. Use after create_react_project.sh / `npm create vite`, or when the user says "set up the boilerplate", "bootstrap this project", "initialize this project", "build the foundation", "scaffold the BFSI starter". Builds the FOUNDATION only — never business features (that is /bfsi-feature). Uses npm, not pnpm.
+description: Generate the COMPLETE BFSI React boilerplate foundation from scratch inside a fresh Vite + React + TypeScript app — dependencies (npm), tooling config, folder structure, security/PII/HTTP/i18n primitives, routing, layouts, and the login reference feature. Use after create_react_project.sh / `npm create vite`, or when the user says "set up the boilerplate", "bootstrap this project", "initialize this project", "build the foundation", "scaffold the BFSI starter". Builds the FOUNDATION only — never business features (that is /bfsi-feature). Uses npm only.
 ---
 
 # BFSI Boilerplate Bootstrap
@@ -16,13 +16,13 @@ app into a production-ready, convention-locked foundation — **and stop there**
 
 ## Ground rules
 
-1. **npm, never pnpm.** Every command, every doc you write, every script in
+1. **npm only.** Every command, every doc you write, every script in
    `package.json`. There is no workspace — this is a single npm package; do not
-   create `pnpm-workspace.yaml` or `@<scope>/core` workspace packages. Shared
+   create workspace manifests or `@<scope>/core` workspace packages. Shared
    code lives under `src/lib/*` and is imported via the `@/` path alias.
 2. **Follow the sibling skills as the source of truth** for each layer (named
    per step). Prefer their patterns over inventing new ones. If one of them
-   shows a pnpm command, substitute the npm equivalent.
+   shows a package-manager command, substitute the npm equivalent.
 3. **Foundation only.** See "Output discipline" — do NOT build dashboards, KYC,
    profile, or any business feature. The only feature you create is the `login`
    reference.
@@ -43,26 +43,26 @@ Ask the user for: the **human-readable project name** and the **API base URL**
 ## Step 1 — Install the BFSI dependency set (npm)
 
 The vite template already ships react, react-dom, typescript, vite, eslint.
-Add the rest, version-pinned:
+Add the rest using the latest npm releases available at install time:
 
 ```bash
 npm install \
-  react-router-dom@6.30.3 react-hook-form@7.76.1 @hookform/resolvers@3.3.4 \
-  zod@3.23.6 react-i18next@14.1.1 i18next@23.11.3 axios@1.16.1 date-fns@3.6.0 \
-  lucide-react@1.17.0 clsx@2.1.1 tailwind-merge@2.3.0 class-variance-authority@0.7.0 \
-  @tanstack/react-query@5.100.14 @tanstack/react-query-devtools@5.100.14 zustand@5.0.14
+   react-router-dom react-hook-form @hookform/resolvers \
+   zod react-i18next i18next axios date-fns \
+   lucide-react clsx tailwind-merge class-variance-authority \
+   @tanstack/react-query @tanstack/react-query-devtools zustand
 
 npm install -D \
-  @types/node@20.11.30 @vitejs/plugin-react-swc@4.3.1 \
-  @testing-library/react@16.3.2 @testing-library/user-event@14.5.2 \
-  @testing-library/jest-dom@6.9.1 @playwright/test@1.60.0 \
-  @commitlint/cli@21.0.0 @commitlint/config-conventional@21.0.0 \
-  @eslint/js@9.39.4 typescript-eslint@8.60.0 eslint-config-prettier@10.1.8 \
-  eslint-plugin-jsx-a11y@6.10.2 eslint-plugin-react@7.37.5 \
-  eslint-plugin-react-hooks@7.1.1 eslint-plugin-react-refresh@0.5.2 globals@17.6.0 \
-  autoprefixer@10.4.19 postcss@8.4.38 tailwindcss@3.4.3 tailwindcss-animate@1.0.7 \
-  husky@9.0.11 lint-staged@15.2.2 jsdom@24.0.0 prettier@3.2.5 \
-  vitest@3.2.4 @vitest/coverage-v8@3.2.4 rollup-plugin-visualizer@5.12.0
+   @types/node @vitejs/plugin-react-swc \
+   @testing-library/react @testing-library/user-event \
+   @testing-library/jest-dom @playwright/test \
+   @commitlint/cli @commitlint/config-conventional \
+   @eslint/js typescript-eslint eslint-config-prettier \
+   eslint-plugin-jsx-a11y eslint-plugin-react \
+   eslint-plugin-react-hooks eslint-plugin-react-refresh globals \
+   autoprefixer postcss tailwindcss tailwindcss-animate \
+   husky lint-staged jsdom prettier \
+   vitest @vitest/coverage-v8 rollup-plugin-visualizer
 ```
 
 Set `package.json` `name` to the project name and these scripts:
@@ -246,7 +246,7 @@ Token handling: call `setAuthToken(axiosInstance, token)` in the mutation's
 1. Generate a **`CLAUDE.md`** at the project root describing the stack, the npm
    commands (`npm run dev`, `npm test`, `npm run lint`, `npm run typecheck`,
    `npm run build`), the critical conventions, and where things live. **Use npm
-   throughout — no pnpm.**
+   throughout.**
 2. Run **`/bfsi-doctor`** and resolve anything it flags (hooks, skills, agents,
    `.claude/settings.json` `$schema`).
 3. `git init`, set `core.hooksPath .husky`, and make the initial scaffold commit

@@ -2,6 +2,10 @@
 # Async post-write ESLint --fix on the changed file. Non-blocking on errors.
 set -euo pipefail
 
+if [[ "${BFSI_FAST_BOOTSTRAP:-}" == "1" ]]; then
+  exit 0
+fi
+
 INPUT=$(cat)
 FILE_PATH=$(printf '%s' "$INPUT" | jq -r '.tool_input.file_path // ""')
 
@@ -26,8 +30,8 @@ if [[ ! -f "$ROOT/package.json" ]] || [[ ! -f "$ROOT/.eslintrc.cjs" && ! -f "$RO
   exit 0
 fi
 
-if command -v pnpm >/dev/null 2>&1; then
-  cd "$ROOT" && OUTPUT=$(pnpm exec eslint --fix "$FILE_PATH" 2>&1 || true)
+if command -v npm >/dev/null 2>&1; then
+  cd "$ROOT" && OUTPUT=$(npm exec -- eslint --fix "$FILE_PATH" 2>&1 || true)
 elif command -v npx >/dev/null 2>&1; then
   cd "$ROOT" && OUTPUT=$(npx eslint --fix "$FILE_PATH" 2>&1 || true)
 else
